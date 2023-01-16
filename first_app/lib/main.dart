@@ -1,28 +1,18 @@
+// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
+
+import 'dart:html';
+import 'dart:js';
+
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 void main() {
   runApp(MaterialApp(
       home: Scaffold(
-    body: Center(
-        child: ElevatedButton(
-      style:
-          ButtonStyle(backgroundColor: MaterialStateColor.resolveWith((states) {
-        return Colors.black;
-      })),
-      onPressed: () => {print("I am pressed")},
-      child: Text(
-        "Press Me",
-        selectionColor: Colors.red,
+    body: SafeArea(
+      child: Container(
+        child: Text("Hello Boss"),
       ),
-    )),
-    appBar: AppBar(
-      title: Center(
-        child: Text("My App Bar"),
-      ),
-    ),
-    floatingActionButton: FloatingActionButton(
-      onPressed: () => {print("I pressed my floating button")},
-      child: Text("+"),
     ),
   )));
 
