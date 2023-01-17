@@ -10,29 +10,40 @@ void main() {
   runApp(MaterialApp(
       home: Scaffold(
           body: SafeArea(
-              child: Center(
-    child: Container(
-      // child: Image.asset("images/image1.jpg"),
-      width: 200,
-      height: 200,
-      child: Center(
-        child: Text(
-          "COFFEE",
-          style: TextStyle(
-              color: Colors.white, fontWeight: FontWeight.w500, 
-              fontSize: 40),
-        ),
-      ),
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(25),
-        border: Border.all(
-          color: Color.fromARGB(255, 66, 245, 185),
-          width: 15,
-        ),
-        image: DecorationImage(image: AssetImage("images/image1.jpg")),
-      ),
+              child: Container(
+                  // color: Colors.yellowAccent,
+
+                  child: Row(
+                    
+                    
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+  children: <Widget>[
+    
+
+    Container(
+      
+      width: 100,
+                      
+                      color: Colors.red,
+                      child: Text("I am red"),
+      
     ),
-  )))));
+    Container(
+      width: 100,
+                      
+                      color: Colors.blue,
+                      child: Text("I am blue"),
+    ),
+    Container(
+      width: 100,
+                      
+                      color: Colors.green,
+                      child: Text("I am green"),
+    ),
+  ],
+)
+)))));
 
   //Material App // Android
   // Cupurtino   // IOS
