@@ -1,4 +1,4 @@
-// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
+// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables, avoid_unnecessary_containers
 
 // import 'dart:html';
 // import 'dart:js';
@@ -18,54 +18,39 @@ void main() {
       home: Scaffold(
           body: SafeArea(
               child: Container(
-    color: Colors.yellowAccent,
-    width: 150,
-    child: SingleChildScrollView(
-      scrollDirection: Axis.vertical,
-      physics: const BouncingScrollPhysics(parent: AlwaysScrollableScrollPhysics()),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
-        // crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          ...getMyWidgets()!,
-          SizedBox(
-            height: 20,
-          ),
-          Container(
-            height: 20,
-            color: Colors.black,
-          )
-        ],
-      ),
-    ),
-  )))));
+                // color: Colors.black,
+                child: Stack(
+                  alignment: AlignmentDirectional.topStart,
+                  fit: StackFit.loose,
+                  children: [...getMyWidgets()],
+                ),
+                )))));
 
   //Material App // Android
   // Cupurtino   // IOS
 }
 
-List<Widget>? getMyWidgets() {
+List<Widget> getMyWidgets() {
   
     List<Color> myContainerColors = [
       Colors.amber,
-      Colors.red,
-      Colors.blue,
-      Colors.green,
-      Colors.purple, 
-      Colors.indigo, 
-      Colors.teal, 
-      Colors.yellow
+      Colors.black
     ];
 
     List<Widget> myResult = [];
 
     for (var i = 0; i < myContainerColors.length; i++) {
       myResult.add(Container(
-        width: 100,
-        height: 100,
-        color: myContainerColors[i],
-        child: Center(child: Text("${i + 1}")),
-      ));
+        child: Positioned(
+          width: (i==1)?10:100,
+          height: (i==1)?10:100,
+          child: Container(
+          width: 100 / (i+1),
+          height: 100 / (i+1),
+          color: myContainerColors[i],
+          child: Center(child: Icon(Icons.alarm_on, size: 30,)),
+          ),
+        )));
     }
     return myResult;
   
