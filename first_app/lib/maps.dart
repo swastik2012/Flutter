@@ -7,12 +7,13 @@ void main(List<String> args) {
 
   // print(myStringMap["1"]);
 
-  Student keerthi = Student();
+  Student keerthi = Student(name: "shreyash", age: 30);
   // keerthi.name = "Keerthi";
   // keerthi.age = 22;
   // print(keerthi.age);
 
   Student saksham = Student.withoutAge("Saksham");
+
   // print(saksham.age);
 }
 
@@ -34,11 +35,19 @@ class Student {
     _name = name;
   }
 
+  void setAge(int age) {
+    _age = age;
+  }
+
   void Study() {
     print("I studied !!!");
   }
 
   void getName() {
-    return _name;
+    print(_name);
+  }
+
+  void getAge() {
+    print(_age);
   }
 }
