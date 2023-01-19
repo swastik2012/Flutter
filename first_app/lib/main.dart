@@ -1,98 +1,61 @@
-// ignore_for_file: prefer_const_constructors, avoid_unnecessary_containers
+// ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 
+// import 'dart:html';
+// import 'dart:js';
+
+// import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
-void main() {
-  runApp(const MyApp());
+List<Color> myContainerColors = [
+  Color.fromARGB(255, 197, 160, 48),
+  Colors.black,
+  Colors.blue,
+  Colors.green,
+  Colors.pink
+];
+// void main() {
+//   runApp(MaterialApp(
+//       home: Scaffold(
+//           body: SafeArea(
+//               child: Column(children: [
+//     MyCustomWidget(myColor: Colors.blue, myHeight: 100,),
+//     MyCustomWidget(myColor: Colors.red, myHeight: 100,),
+//   ])))));
+
+//   //Material App // Android
+//   // Cupurtino   // IOS
+// }
+
+void main(List<String> args) {
+  // Map -> key and value pair
+
+  Map<int, String> myStringMap = {1: "Shreyash"};
+  myStringMap.addAll({2: "Aditya", 3: "Vishal"});
+
+  myStringMap[1] = "Gulab";
+  print(myStringMap[1]);
 }
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+class MyCustomWidget extends StatelessWidget {
+  final Color myColor;
+  final double myHeight;
 
-  // This widget is the root of your application.
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      
-      home: const MyHomePage(),
-    );
-  }
-}
-
-
-class MyHomePage extends StatelessWidget {
-  const MyHomePage({super.key});
+  const MyCustomWidget({required this.myColor, required this.myHeight});
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: SafeArea(
-        child: SizedBox(
-          width: MediaQuery.of(context).size.width,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Container(
-                margin: EdgeInsets.all(8),
-                child: Text(
-                  "Login with your mobile",
-                ),
-              ),
-              Stack(
-                clipBehavior: Clip.none,
-                alignment: Alignment.center,
-                // fit: StackFit.loose,
-                // mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Container(
-                    padding: EdgeInsets.only(
-                      left: 6,
-                      top: 6,
-                      right: 22,
-                      bottom: 6,
-                    ),
-                    decoration: BoxDecoration(
-                      border: Border.all(
-                        width: 0.8,
-                        color: Colors.blueGrey,
-                      ),
-                      borderRadius: BorderRadius.all(
-                        Radius.circular(
-                          10,
-                        ),
-                      ),
-                    ),
-                    child: Text(
-                      "94999999",
-                    ),
-                  ),
-                  Positioned(
-                    right: -10,
-                    child: Container(
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        border: Border.all(
-                          width: 0.8,
-                          color: Colors.blueGrey,
-                        ),
-                        borderRadius: BorderRadius.all(
-                          Radius.circular(
-                            8,
-                          ),
-                        ),
-                      ),
-                      child: Icon(
-                        Icons.check,
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            ],
-          ),
+    // TODO: implement build
+
+    return Column(
+      children: [
+        Container(
+          height: myHeight,
+          color: myColor,
         ),
-      ),
+        SizedBox(
+          height: 10,
+        )
+      ],
     );
   }
 }
