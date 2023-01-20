@@ -1,18 +1,9 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 
-// import 'dart:html';
-// import 'dart:js';
+import 'dart:ui';
 
-// import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
-List<Color> myContainerColors = [
-  Color.fromARGB(255, 197, 160, 48),
-  Colors.black,
-  Colors.blue,
-  Colors.green,
-  Colors.pink
-];
 int myNumber = 0;
 
 void main() {
@@ -23,52 +14,6 @@ void main() {
   // Cupurtino   // IOS
 }
 
-class MyCounterWidget extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    // TODO: implement build
-
-    return Scaffold(
-      body: SafeArea(
-        child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
-          Padding(
-            padding: EdgeInsets.all(20),
-            child: Text("Number"),
-          ),
-          Padding(
-            padding: EdgeInsets.all(20),
-            child: Text(myNumber.toString()),
-          ),
-          Padding(
-            padding: EdgeInsets.all(30),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                ElevatedButton(
-                    onPressed: OnPressedMinus,
-                    child: Text("-"),
-                    style: ButtonStyle(
-                        backgroundColor:
-                            MaterialStateProperty.all(Colors.black45))),
-                SizedBox(
-                  height: 10,
-                  width: 10,
-                ),
-                ElevatedButton(
-                    onPressed: OnPressedPlus,
-                    child: Text("+"),
-                    style: ButtonStyle(
-                        backgroundColor:
-                            MaterialStateProperty.all(Colors.black45)))
-              ],
-            ),
-          )
-        ]),
-      ),
-    );
-  }
-}
-
 class MyCounterStatefulWidget extends StatefulWidget {
   @override
   State<StatefulWidget> createState() {
@@ -77,64 +22,75 @@ class MyCounterStatefulWidget extends StatefulWidget {
 }
 
 class MyCounterWidgetState extends State<MyCounterStatefulWidget> {
-  int myNumber = 10;
-
-  TextEditingController textEditingController = TextEditingController();
-
   @override
-  void initState() {
-    super.initState();
-    textEditingController.text = "shreyash";
-    myNumber = getDataFromMyDb();
-  }
-
-  int getDataFromMyDb() {
-    return 13;
-  }
-
   Widget build(BuildContext context) {
-    return Column(mainAxisAlignment: MainAxisAlignment.center, children: [
-      Padding(
-        padding: EdgeInsets.all(20),
-        child: Text("Please enter your name "),
+    return Scaffold(
+      body: Center(
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Row(
+              children: [
+                Container(
+                  padding: EdgeInsets.all(10),
+                  margin: EdgeInsets.all(20),
+                  height: 300,
+                  // width: double.infinity,
+                  width: 450,
+                  decoration: BoxDecoration(
+                    color: Colors.grey.shade300, 
+                    borderRadius: BorderRadius.circular(20), 
+                    boxShadow: [BoxShadow(color: Colors.black45, blurRadius: 10, offset: Offset(2, 2))]
+                  ),
+                  child: 
+                  Container(
+                    
+                    margin: EdgeInsets.fromLTRB(10, 10, 180, 10),
+                    height: 100,
+                    // width: double.infinity,
+                    width: 100,
+                    decoration: BoxDecoration(
+                    color: Colors.grey, 
+                    borderRadius: BorderRadius.circular(20), 
+                    boxShadow: [BoxShadow(color: Colors.black45, blurRadius: 10, offset: Offset(2, 2))]),
+                    
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        Row(
+                      
+                      children: [
+                        Padding(padding: EdgeInsets.all(10)),
+                        Text("Sarita", style: TextStyle(color: Colors.white, ),)
+                      ],
+                    ),
+                    Row(
+                      
+                      children: [
+                        Padding(padding: EdgeInsets.all(10)),
+                        Text("Blood", style: TextStyle(color: Colors.white,),)
+                      ],
+                    ),
+                    Row(
+                      
+                      children: [
+                        Padding(padding: EdgeInsets.all(10)),
+                        Text("Bank", style: TextStyle(color: Colors.white, ),)
+                      ],
+                    ),
+                    ]),
+                  ),
+                ),
+
+                
+
+              ],
+            )
+          ],
       ),
-      TextField(
-        controller: textEditingController,
-        onChanged: (text) => {
-          print(text),
-          if (text.contains("bad"))
-            {
-              setState(() {
-                textEditingController.clear();
-              })
-            }
-        },
-      )
-    ]);
+    ));
   }
 
-  void OnPressedMinus() {
-    setState(() {
-      myNumber = myNumber - 1;
-    });
-
-    print("pressed - sign : " + myNumber.toString());
-  }
-
-  void OnPressedPlus() {
-    setState(() {
-      myNumber = myNumber + 1;
-    });
-    print("pressed + sign : " + myNumber.toString());
-  }
+  
 }
 
-void OnPressedMinus() {
-  myNumber = myNumber - 1;
-  print("pressed - sign : " + myNumber.toString());
-}
-
-void OnPressedPlus() {
-  myNumber = myNumber + 1;
-  print("pressed + sign : " + myNumber.toString());
-}

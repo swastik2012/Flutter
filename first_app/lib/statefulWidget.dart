@@ -79,51 +79,60 @@ class MyCounterStatefulWidget extends StatefulWidget {
 class MyCounterWidgetState extends State<MyCounterStatefulWidget> {
   int myNumber = 10;
 
+  TextEditingController textEditingController = TextEditingController();
+
   @override
   void initState() {
     super.initState();
+    textEditingController.text = "shreyash";
     myNumber = getDataFromMyDb();
   }
 
   int getDataFromMyDb() {
-    return 13;
+    return 0;
   }
 
-  @override
   Widget build(BuildContext context) {
-    return Column(mainAxisAlignment: MainAxisAlignment.center, children: [
-      Padding(
-        padding: EdgeInsets.all(20),
-        child: Text("Number"),
-      ),
-      Padding(
-        padding: EdgeInsets.all(20),
-        child: Text(myNumber.toString()),
-      ),
-      Padding(
-        padding: EdgeInsets.all(30),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            ElevatedButton(
-                onPressed: OnPressedMinus,
-                child: Text("-"),
-                style: ButtonStyle(
-                    backgroundColor:
-                        MaterialStateProperty.all(Colors.black45))),
-            SizedBox(
-              height: 10,
-              width: 10,
+    return Scaffold(
+      body: SafeArea(
+        child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
+          Padding(
+            padding: EdgeInsets.all(20),
+            child: Text("Number"),
+          ),
+          Padding(
+            padding: EdgeInsets.all(20),
+            child: Text(myNumber.toString()),
+          ),
+          Padding(
+            padding: EdgeInsets.all(30),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                if(myNumber>0)
+                ElevatedButton(
+                    onPressed: OnPressedMinus,
+                    child: Text("-"),
+                    style: ButtonStyle(
+                        backgroundColor:
+                            MaterialStateProperty.all(Colors.black45))),
+                SizedBox(
+                  height: 10,
+                  width: 10,
+                ),
+                if(myNumber>0 || myNumber==0 || myNumber<0)
+                ElevatedButton(
+                    onPressed: OnPressedPlus,
+                    child: Text("+"),
+                    style: ButtonStyle(
+                        backgroundColor:
+                            MaterialStateProperty.all(Colors.black45)))
+              ],
             ),
-            ElevatedButton(
-                onPressed: OnPressedPlus,
-                child: Text("+"),
-                style: ButtonStyle(
-                    backgroundColor: MaterialStateProperty.all(Colors.black45)))
-          ],
-        ),
-      )
-    ]);
+          )
+        ]),
+      ),
+    );
   }
 
   void OnPressedMinus() {
