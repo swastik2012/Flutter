@@ -77,7 +77,17 @@ class MyCounterStatefulWidget extends StatefulWidget {
 }
 
 class MyCounterWidgetState extends State<MyCounterStatefulWidget> {
-  int myNumber = 0;
+  int myNumber = 10;
+
+  @override
+  void initState() {
+    super.initState();
+    myNumber = getDataFromMyDb();
+  }
+
+  int getDataFromMyDb() {
+    return 13;
+  }
 
   @override
   Widget build(BuildContext context) {
