@@ -140,13 +140,7 @@ void OnPressedPlus() {
 
 
 void OnPressedMinus() {
-
-  
-
-  
-    myNumber = myNumber - 1;
- 
-
+  myNumber = myNumber - 1;
   print("pressed - sign : " + myNumber.toString());
 }
 
