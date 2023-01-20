@@ -13,10 +13,11 @@ List<Color> myContainerColors = [
   Colors.green,
   Colors.pink
 ];
-int myNumber = 1;
+int myNumber = 0;
 
 void main() {
-  runApp(MaterialApp(home: Scaffold(body: SafeArea(child: MyCounterWidget()))));
+  runApp(MaterialApp(
+      home: Scaffold(body: SafeArea(child: MyCounterStatefulWidget()))));
 
   //Material App // Android
   // Cupurtino   // IOS
@@ -27,8 +28,7 @@ class MyCounterWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     // TODO: implement build
 
-    return
-    Scaffold(
+    return Scaffold(
       body: SafeArea(
         child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
           Padding(
@@ -42,23 +42,24 @@ class MyCounterWidget extends StatelessWidget {
           Padding(
             padding: EdgeInsets.all(30),
             child: Row(
-              
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                
-                ElevatedButton(onPressed: OnPressedMinus, child: Text("-"), 
-                style: ButtonStyle(
-                  backgroundColor: MaterialStateProperty.all(Colors.black45))
-                )
-                ,
+                ElevatedButton(
+                    onPressed: OnPressedMinus,
+                    child: Text("-"),
+                    style: ButtonStyle(
+                        backgroundColor:
+                            MaterialStateProperty.all(Colors.black45))),
                 SizedBox(
                   height: 10,
                   width: 10,
                 ),
-                ElevatedButton(onPressed: OnPressedPlus, child: Text("+"),
-                style: ButtonStyle(
-                  backgroundColor: MaterialStateProperty.all(Colors.black45))
-                )
+                ElevatedButton(
+                    onPressed: OnPressedPlus,
+                    child: Text("+"),
+                    style: ButtonStyle(
+                        backgroundColor:
+                            MaterialStateProperty.all(Colors.black45)))
               ],
             ),
           )
@@ -68,16 +69,88 @@ class MyCounterWidget extends StatelessWidget {
   }
 }
 
+
+
+class MyCounterStatefulWidget extends StatefulWidget {
+  @override
+  State<StatefulWidget> createState() {
+    return MyCounterWidgetState();
+  }
+}
+
+class MyCounterWidgetState extends State<MyCounterStatefulWidget> {
+  int myNumber = 0;
+  // TODO: implement widget
+  @override
+  Widget build(BuildContext context) {
+    return Column(mainAxisAlignment: MainAxisAlignment.center, children: [
+      Padding(
+        padding: EdgeInsets.all(20),
+        child: Text("Number"),
+      ),
+      Padding(
+        padding: EdgeInsets.all(20),
+        child: Text(myNumber.toString()),
+      ),
+      Padding(
+        padding: EdgeInsets.all(30),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            ElevatedButton(
+                onPressed: OnPressedMinus,
+                child: Text("-"),
+                style: ButtonStyle(
+                    backgroundColor:
+                        MaterialStateProperty.all(Colors.black45))),
+            SizedBox(
+              height: 10,
+              width: 10,
+            ),
+            ElevatedButton(
+                onPressed: OnPressedPlus,
+                child: Text("+"),
+                style: ButtonStyle(
+                    backgroundColor: MaterialStateProperty.all(Colors.black45)))
+          ],
+        ),
+      )
+    ]);
+  }
+
+
+  void OnPressedMinus() {
+
+  setState(() {
+    myNumber = myNumber - 1;
+  });
+
+  print("pressed - sign : " + myNumber.toString());
+}
+
+void OnPressedPlus() {
+
+  setState(() {
+    myNumber = myNumber + 1;
+  });
+  print("pressed + sign : " + myNumber.toString());
+}
+
+}
+
+
 void OnPressedMinus() {
-  myNumber = myNumber - 1;
+
+  
+
+  
+    myNumber = myNumber - 1;
+ 
+
   print("pressed - sign : " + myNumber.toString());
 }
 
 void OnPressedPlus() {
   myNumber = myNumber + 1;
   print("pressed + sign : " + myNumber.toString());
-}
-
-class MyCounterAppStateful extends StatefulWidget {
-
 }
