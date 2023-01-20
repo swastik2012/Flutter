@@ -79,9 +79,12 @@ class MyCounterStatefulWidget extends StatefulWidget {
 class MyCounterWidgetState extends State<MyCounterStatefulWidget> {
   int myNumber = 10;
 
+  TextEditingController textEditingController = TextEditingController();
+
   @override
   void initState() {
     super.initState();
+    textEditingController.text = "shreyash";
     myNumber = getDataFromMyDb();
   }
 
@@ -89,39 +92,23 @@ class MyCounterWidgetState extends State<MyCounterStatefulWidget> {
     return 13;
   }
 
-  @override
   Widget build(BuildContext context) {
     return Column(mainAxisAlignment: MainAxisAlignment.center, children: [
       Padding(
         padding: EdgeInsets.all(20),
-        child: Text("Number"),
+        child: Text("Please enter your name "),
       ),
-      Padding(
-        padding: EdgeInsets.all(20),
-        child: Text(myNumber.toString()),
-      ),
-      Padding(
-        padding: EdgeInsets.all(30),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            ElevatedButton(
-                onPressed: OnPressedMinus,
-                child: Text("-"),
-                style: ButtonStyle(
-                    backgroundColor:
-                        MaterialStateProperty.all(Colors.black45))),
-            SizedBox(
-              height: 10,
-              width: 10,
-            ),
-            ElevatedButton(
-                onPressed: OnPressedPlus,
-                child: Text("+"),
-                style: ButtonStyle(
-                    backgroundColor: MaterialStateProperty.all(Colors.black45)))
-          ],
-        ),
+      TextField(
+        controller: textEditingController,
+        onChanged: (text) => {
+          print(text),
+          if (text.contains("bad"))
+            {
+              setState(() {
+                textEditingController.clear();
+              })
+            }
+        },
       )
     ]);
   }
