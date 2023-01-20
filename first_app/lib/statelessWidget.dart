@@ -78,6 +78,4 @@ void OnPressedPlus() {
   print("pressed + sign : " + myNumber.toString());
 }
 
-class MyCounterAppStateful extends StatefulWidget {
 
-}
