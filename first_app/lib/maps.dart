@@ -1,53 +1,111 @@
-void main(List<String> args) {
-  // Map -> key and value pair
+void main() {
+ 
 
-  // Map<String, String> myStringMap = {"1": "Shreyash", "2": "Hari", "3": "Ravi"};
+  Student.collegeName = "LPU";
+ 
+  ITGuy rahul = ITGuy(myName : "Rahul", myAge : 21);
+  rahul.setItName("RaGa");
+ 
 
-  // myStringMap.forEach((key, value) => print(value));
-
-  // print(myStringMap["1"]);
-
-  Student keerthi = Student(name: "shreyash", age: 30);
-  // keerthi.name = "Keerthi";
-  // keerthi.age = 22;
-  // print(keerthi.age);
-
-  Student saksham = Student.withoutAge("Saksham");
-
-  // print(saksham.age);
+  print(rahul.getName());
+ 
 }
 
 class Student {
   String? _name;
   int? _age;
   static String? collegeName;
-
-  Student({required String name, required int age}) {
+ 
+  Student({required String name,required int age}) {
+   
     _name = name;
     _age = age;
+   
+    print ("Called Student Constructor");
   }
-
-  Student.withoutAge(String name) {
+ 
+  Student.withoutAge(String name){
     _name = name;
   }
-
+ 
+  static String? getCollegeName() {
+    return collegeName;
+  }
+ 
+  //getters
+  String? getName() {
+    return _name;
+  }
+ 
+  //setters
   void setName(String name) {
     _name = name;
   }
-
-  void setAge(int age) {
-    _age = age;
-  }
-
-  void Study() {
+ 
+ 
+  void study() {
     print("I studied !!!");
   }
+}
 
-  void getName() {
-    print(_name);
+class ITGuy extends Student implements
+  WriteCode, TestCode, GiveInterview {
+  String? itName;
+ 
+  ITGuy({required String myName,required int myAge}) : super(name : myName, age : myAge) {
+    print("called ITGuy constructor");
+  }
+ 
+  @override
+  writeCode() {
+    return "it code";
   }
 
-  void getAge() {
-    print(_age);
+  @override
+  giveInterview() {
+    return true;
+  }
+ 
+  @override
+  testCode() {
+    return true;
+  }
+ 
+  void setItName(String name){
+    itName = name;
+  }
+ 
+  @override
+  String? getName(){
+    print(super.getName());
+    return itName;
+  }
+ 
+ 
+}
+
+
+abstract class WriteCode {
+  String writeCode() {
+    return "Code";
   }
 }
+
+abstract class GiveInterview {
+  bool giveInterview() {
+    return true;
+  }
+}
+
+abstract class TestCode {
+  bool testCode() {
+    return true;
+  }
+}
+
+
+// Whatsapp implements sendMessage
+
+// SMS implements sendMessage
+
+// Email implements sendMessage
