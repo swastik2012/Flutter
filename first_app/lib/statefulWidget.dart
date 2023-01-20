@@ -69,8 +69,6 @@ class MyCounterWidget extends StatelessWidget {
   }
 }
 
-
-
 class MyCounterStatefulWidget extends StatefulWidget {
   @override
   State<StatefulWidget> createState() {
@@ -79,8 +77,18 @@ class MyCounterStatefulWidget extends StatefulWidget {
 }
 
 class MyCounterWidgetState extends State<MyCounterStatefulWidget> {
-  int myNumber = 0;
-  // TODO: implement widget
+  int myNumber = 10;
+
+  @override
+  void initState() {
+    super.initState();
+    myNumber = getDataFromMyDb();
+  }
+
+  int getDataFromMyDb() {
+    return 13;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Column(mainAxisAlignment: MainAxisAlignment.center, children: [
@@ -118,35 +126,24 @@ class MyCounterWidgetState extends State<MyCounterStatefulWidget> {
     ]);
   }
 
-
   void OnPressedMinus() {
+    setState(() {
+      myNumber = myNumber - 1;
+    });
 
-  setState(() {
-    myNumber = myNumber - 1;
-  });
+    print("pressed - sign : " + myNumber.toString());
+  }
 
-  print("pressed - sign : " + myNumber.toString());
+  void OnPressedPlus() {
+    setState(() {
+      myNumber = myNumber + 1;
+    });
+    print("pressed + sign : " + myNumber.toString());
+  }
 }
-
-void OnPressedPlus() {
-
-  setState(() {
-    myNumber = myNumber + 1;
-  });
-  print("pressed + sign : " + myNumber.toString());
-}
-
-}
-
 
 void OnPressedMinus() {
-
-  
-
-  
-    myNumber = myNumber - 1;
- 
-
+  myNumber = myNumber - 1;
   print("pressed - sign : " + myNumber.toString());
 }
 
