@@ -1,96 +1,63 @@
+// assignment
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 
-import 'dart:ui';
-
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
-int myNumber = 0;
-
-void main() {
+void main(){
   runApp(MaterialApp(
-      home: Scaffold(body: SafeArea(child: MyCounterStatefulWidget()))));
-
-  //Material App // Android
-  // Cupurtino   // IOS
+    home: Scaffold(
+      body: SafeArea(
+        child: MyCounterWidget(),
+      ),
+    ),
+  ));
 }
 
-class MyCounterStatefulWidget extends StatefulWidget {
+class MyCounterWidget extends StatefulWidget {
   @override
   State<StatefulWidget> createState() {
-    return MyCounterWidgetState();
+    return MyCounterWidgetState();    
   }
 }
 
-class MyCounterWidgetState extends State<MyCounterStatefulWidget> {
+
+class MyCounterWidgetState extends State<MyCounterWidget> {
+  int myNumber=0;
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Center(
+    return Container(
+      
+      height: 100,
+      width: 100,
+      color: Colors.blue,
         child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Row(
-              children: [
-                Container(
-                  padding: EdgeInsets.all(10),
-                  margin: EdgeInsets.all(20),
-                  height: 300,
-                  // width: double.infinity,
-                  width: 450,
-                  decoration: BoxDecoration(
-                    color: Colors.grey.shade300, 
-                    borderRadius: BorderRadius.circular(20), 
-                    boxShadow: [BoxShadow(color: Colors.black45, blurRadius: 10, offset: Offset(2, 2))]
-                  ),
-                  child: 
-                  Container(
-                    
-                    margin: EdgeInsets.fromLTRB(10, 10, 180, 10),
-                    height: 100,
-                    // width: double.infinity,
-                    width: 100,
-                    decoration: BoxDecoration(
-                    color: Colors.grey, 
-                    borderRadius: BorderRadius.circular(20), 
-                    boxShadow: [BoxShadow(color: Colors.black45, blurRadius: 10, offset: Offset(2, 2))]),
-                    
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        Row(
-                      
-                      children: [
-                        Padding(padding: EdgeInsets.all(10)),
-                        Text("Sarita", style: TextStyle(color: Colors.white, ),)
-                      ],
-                    ),
-                    Row(
-                      
-                      children: [
-                        Padding(padding: EdgeInsets.all(10)),
-                        Text("Blood", style: TextStyle(color: Colors.white,),)
-                      ],
-                    ),
-                    Row(
-                      
-                      children: [
-                        Padding(padding: EdgeInsets.all(10)),
-                        Text("Bank", style: TextStyle(color: Colors.white, ),)
-                      ],
-                    ),
-                    ]),
-                  ),
-                ),
-
+              TextField(
+                decoration: InputDecoration(focusColor: Colors.lightBlueAccent,
                 
-
-              ],
-            )
+                ),
+              )
           ],
-      ),
-    ));
+        )
+      
+      );
   }
 
-  
+   void OnPressedMinus() {
+    setState(() {
+      myNumber = myNumber - 1;
+    });
+
+    print("pressed - sign : " + myNumber.toString());
+  }
+
+  void OnPressedPlus() {
+    setState(() {
+      myNumber = myNumber + 1;
+    });
+    print("pressed + sign : " + myNumber.toString());
+  }
 }
 
