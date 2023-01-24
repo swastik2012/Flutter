@@ -1,87 +1,70 @@
 import 'dart:html';
+import 'dart:js';
 
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
 
 void main() {
   runApp(MaterialApp(
-    home: Screen1(
-      color: Colors.blue,
-    ),
+    initialRoute: "/",
+    routes: {
+      "/": (context) => Screen1(),
+      "/screen2": (context) => Screen2(),
+      "/screen3": (context) => Screen3(),
+      "/screen4": (context) => Screen4(),
+    },
   ));
 }
 
-class Screen1 extends StatefulWidget {
-  final Color color;
-  const Screen1({super.key, required this.color});
-
-  @override
-  State<Screen1> createState() => _Screen1State();
-}
-
-class _Screen1State extends State<Screen1> {
-  Color? myColor;
-
-  @override
-  void initState() {
-    myColor = widget.color;
-    super.initState();
-  }
+class Screen1 extends StatelessWidget {
+  const Screen1({super.key});
 
   @override
   Widget build(BuildContext context) {
     return SafeArea(
         child: Scaffold(
-            backgroundColor: myColor,
+            backgroundColor: Colors.redAccent,
             body: Center(
               child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: [
-                          InkWell(
-                            onTap: (() => {
-                                  print("On Screen 2"),
-                                  Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: ((context) => Screen2(
-                                                sourceButton: 1,
-                                                myFun: changeBackground,
-                                              ))))
-                                }),
-                            child: Container(child: Text("button 1")),
-                          ),
-                          InkWell(
-                            onTap: (() => {
-                                  print("On Screen 3"),
-                                  Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: ((context) => Screen2(
-                                                sourceButton: 2,
-                                                myFun: changeBackground,
-                                              ))))
-                                }),
-                            child: Container(child: Text("button 2")),
-                          ),
-                        ]),
+                    InkWell(
+                      onTap: (() => {
+                            print("On Screen 1"),
+                            Navigator.pushNamed(context, "/screen2")
+                          }),
+                      child: Container(child: Text("Screen 1")),
+                    ),
                   ]),
             )));
-  }
-
-  void changeBackground(Color color) {
-    myColor = color;
-    setState(() {});
   }
 }
 
 class Screen2 extends StatelessWidget {
-  final int sourceButton;
-  final void Function(Color) myFun;
-  const Screen2({super.key, required this.sourceButton, required this.myFun});
-  
+  const Screen2({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return SafeArea(
+        child: Scaffold(
+            backgroundColor: Colors.blue,
+            body: Center(
+              child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    InkWell(
+                      onTap: (() => {
+                            print("On Screen 2"),
+                            Navigator.pushNamed(context, "/screen3")
+                          }),
+                      child: Container(child: Text("Screen 2")),
+                    ),
+                  ]),
+            )));
+  }
+}
+
+class Screen3 extends StatelessWidget {
+  const Screen3({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -93,42 +76,36 @@ class Screen2 extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     InkWell(
-                      onTap: (() =>
-                          {
-                            myFun(Colors.red),
-                          Navigator.pop(context)}),
-                      child: Container(child: 
-                      Text("At Screen 2 with the source button of screen 1 set to be: $sourceButton")
-                      ),
+                      onTap: (() => {
+                            // print("On Screen 3"),
+                            // Navigator.pushNamed(context, "/")
+                            Navigator.of(context).pushNamedAndRemoveUntil(
+                                '/screen4', (Route<dynamic> route) => false)
+                          }),
+                      child: Container(child: Text("Screen 3")),
                     ),
                   ]),
             )));
   }
 }
 
-// class Screen3 extends StatelessWidget {
-//   const Screen3({super.key});
+class Screen4 extends StatelessWidget {
+  const Screen4({super.key});
 
-//   @override
-//   Widget build(BuildContext context) {
-//     return SafeArea(
-//         child: Scaffold(
-//             backgroundColor: Colors.red,
-//             body: Center(
-//               child: Column(
-//                   mainAxisAlignment: MainAxisAlignment.center,
-//                   children: [
-//                     InkWell(
-//                       onTap: (() => {
-//                             print("On Screen 3"),
-//                             Navigator.push(
-//                                 context,
-//                                 MaterialPageRoute(
-//                                     builder: ((context) => Screen1())))
-//                           }),
-//                       child: Container(child: Text("Screen 3")),
-//                     ),
-//                   ]),
-//             )));
-//   }
-// }
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+        backgroundColor: Colors.blue,
+        body: SafeArea(
+            child: Center(
+                child: InkWell(
+          onTap: (() {
+            Navigator.of(context)
+                .pushNamedAndRemoveUntil('/', (Route<dynamic> route) => false);
+          }),
+          child: Container(
+            child: Text("Screen 4"),
+          ),
+        ))));
+  }
+}
