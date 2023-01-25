@@ -80,6 +80,22 @@ class _Screen_2State extends State<Screen_2> {
                 child: Text("Go to screen 1"),
               ),
             ),
+            AnimatedTextKit(
+              animatedTexts: [
+                TypewriterAnimatedText(
+                  'Hello world!',
+                  textStyle: const TextStyle(
+                    fontSize: 32.0,
+                    fontWeight: FontWeight.bold,
+                  ),
+                  speed: const Duration(milliseconds: 200),
+                ),
+              ],
+              totalRepeatCount: 4,
+              pause: const Duration(milliseconds: 100),
+              displayFullTextOnTap: true,
+              stopPauseOnTap: true,
+            )
           ],
         ),
       ],
