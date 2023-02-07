@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_const_constructors
+
 import 'package:flutter/material.dart';
 
 void main() => runApp(MyApp());
@@ -6,6 +8,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: 'Score Board',
       home: ScoreBoard(),
     );
@@ -18,89 +21,88 @@ class ScoreBoard extends StatefulWidget {
 }
 
 class _ScoreBoardState extends State<ScoreBoard> {
-  int _teamAScore = 0;
-  int _teamBScore = 0;
-
-  void _incrementTeamAScore() {
-    setState(() {
-      _teamAScore++;
-    });
-  }
-
-  void _incrementTeamBScore() {
-    setState(() {
-      _teamBScore++;
-    });
-  }
-
-  void _decrementTeamAScore() {
-    setState(() {
-      _teamAScore--;
-    });
-  }
-
-  void _decrementTeamBScore() {
-    setState(() {
-      _teamBScore--;
-    });
-  }
-
+  int eng = 3;
+  int fra = 1;
+  // List<Goal> engGoals = [];
+  // List<Goal> fraGoals = [];
+  
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      
       appBar: AppBar(
-        title: Text('Score Board'),
+        title: Center(child: Text('Score Board')),
       ),
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        children: <Widget>[
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: <Widget>[
-              Text('ENG', style: TextStyle(
-                fontSize: 25,
-                fontWeight: FontWeight.bold,
-                color: Colors.black
-              ),),
-              Text('$_teamAScore'),
-              Column(
-                children: <Widget>[
-                  IconButton(
-                    icon: Icon(Icons.add),
-                    onPressed: _incrementTeamAScore,
+      body: SafeArea(
+        child: Column(
+          
+          children: [
+
+            Container(
+              padding: EdgeInsets.all(10),
+              child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Container(
+                  child: Text(
+                    'ENG',
+                    style: TextStyle(
+                      fontSize: 40,
+                      color: Colors.black,
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
-                  IconButton(
-                    icon: Icon(Icons.remove),
-                    onPressed: _decrementTeamAScore,
+                ),
+                SizedBox(
+                  width: 10,
+                ),
+                Container(
+                    child: Text(
+                  '$eng : $fra',
+                  style: TextStyle(
+                    fontSize: 40,
+                    color: Colors.red,
+                    // fontWeight: FontWeight.bold,
                   ),
-                ],
-              ),
-            ],
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: <Widget>[
-              Text('FRA', style: TextStyle(
-                fontSize: 25,
-                fontWeight: FontWeight.bold,
-                color: Colors.black
-              ),),
-              Text('$_teamBScore'),
-              Column(
-                children: <Widget>[
-                  IconButton(
-                    icon: Icon(Icons.add),
-                    onPressed: _incrementTeamBScore,
+                )),
+                SizedBox(
+                  width: 10,
+                ),
+                Container(
+                  child: Text(
+                    'FRA',
+                    style: TextStyle(
+                      fontSize: 40,
+                      color: Colors.black,
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
-                  IconButton(
-                    icon: Icon(Icons.remove),
-                    onPressed: _decrementTeamBScore,
-                  ),
-                ],
-              ),
-            ],
-          ),
-        ],
+                ),
+                
+              ],
+                      ),
+            ),
+            Container(
+              width: double.infinity,
+              height: 2,
+              color: Colors.grey[300],
+              margin: EdgeInsets.symmetric(
+                horizontal: 
+                MediaQuery.of(context).size.width * 0.1
+                ),
+            ),
+            SizedBox(
+              height: 10,
+            ),
+            Container(
+              color: Colors.grey,
+              margin: EdgeInsets.symmetric(
+                horizontal: 
+                MediaQuery.of(context).size.width * 0.1
+                ),
+            )
+          ]
+        ),
       ),
     );
   }
