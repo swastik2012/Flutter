@@ -1,162 +1,107 @@
 import 'package:flutter/material.dart';
-import 'package:animated_text_kit/animated_text_kit.dart';
 
-void main() {
-  runApp(MyHome());
-}
+void main() => runApp(MyApp());
 
-class MyHome extends StatefulWidget {
-  const MyHome({super.key});
-
-  @override
-  State<MyHome> createState() => _MyHomeState();
-}
-
-
-
-class _MyHomeState extends State<MyHome> {
-  bool myThemeDark = false;
+class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      theme: (myThemeDark) ? ThemeData.dark() : ThemeData(),
-      home: Screen_1(
-        sourceButton: 1,
-        changeThemeToDark: changeMyAppTheme,
-      ),
+      title: 'Score Board',
+      home: ScoreBoard(),
     );
   }
+}
 
-  void changeMyAppTheme(bool changeToBlack) {
+class ScoreBoard extends StatefulWidget {
+  @override
+  _ScoreBoardState createState() => _ScoreBoardState();
+}
+
+class _ScoreBoardState extends State<ScoreBoard> {
+  int _teamAScore = 0;
+  int _teamBScore = 0;
+
+  void _incrementTeamAScore() {
     setState(() {
-      myThemeDark = changeToBlack;
+      _teamAScore++;
     });
   }
-}
 
-class Screen_2 extends StatefulWidget {
-  final Color color;
-  final Function(bool) changeThemeToDark;
-  const Screen_2(
-      {super.key, required this.color, required this.changeThemeToDark});
+  void _incrementTeamBScore() {
+    setState(() {
+      _teamBScore++;
+    });
+  }
 
-  @override
-  State<Screen_2> createState() => _Screen_2State();
-}
+  void _decrementTeamAScore() {
+    setState(() {
+      _teamAScore--;
+    });
+  }
 
-class _Screen_2State extends State<Screen_2> {
-  Color? myColor;
-  bool myValue = false;
-
-  @override
-  void initState() {
-    myColor = widget.color;
-    super.initState();
+  void _decrementTeamBScore() {
+    setState(() {
+      _teamBScore--;
+    });
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: SafeArea(
-            child: Center(
-                child: Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: [
-            Switch(
-                value: myValue,
-                onChanged: (value) {
-                  setState(() {
-                    myValue = value;
-                  });
-                  widget.changeThemeToDark(value);
-                }),
-            InkWell(
-              onTap: () {
-                print("On Screen 1");
-                Navigator.pop(context);
-              },
-              child: Container(
-                child: Text("Go to screen 1"),
-              ),
-            ),
-            AnimatedTextKit(
-              animatedTexts: [
-                TypewriterAnimatedText(
-                  'Hello world!',
-                  textStyle: const TextStyle(
-                    fontSize: 32.0,
-                    fontWeight: FontWeight.bold,
-                  ),
-                  speed: const Duration(milliseconds: 200),
-                ),
-              ],
-              totalRepeatCount: 4,
-              pause: const Duration(milliseconds: 100),
-              displayFullTextOnTap: true,
-              stopPauseOnTap: true,
-            )
-          ],
-        ),
-      ],
-    ))));
-  }
-
-  void changeBackground(Color color) {
-    myColor = color;
-    print(color);
-    print("Reached here");
-    setState(() {});
-  }
-}
-
-class Screen_1 extends StatelessWidget {
-  final int sourceButton;
-
-  final Function(bool) changeThemeToDark;
-
-  const Screen_1(
-      {super.key, required this.sourceButton, required this.changeThemeToDark});
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-        body: SafeArea(
-            child: Center(
-                child: InkWell(
-      onTap: () {
-        Navigator.push(
-            context,
-            MaterialPageRoute(
-                builder: ((context) => Screen_2(
-                    color: Colors.green,
-                    changeThemeToDark: changeThemeToDark))));
-      },
-      child: Container(
-        child: Text("Go to screen 2"),
+      appBar: AppBar(
+        title: Text('Score Board'),
       ),
-    ))));
-  }
-}
-
-class Screen3 extends StatelessWidget {
-  const Screen3({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-        backgroundColor: Colors.blue,
-        body: SafeArea(
-            child: Center(
-                child: InkWell(
-          onTap: () {
-            Navigator.pop(context);
-          },
-          child: Container(
-            child: Text("Screen 3"),
+      body: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        children: <Widget>[
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: <Widget>[
+              Text('ENG', style: TextStyle(
+                fontSize: 25,
+                fontWeight: FontWeight.bold,
+                color: Colors.black
+              ),),
+              Text('$_teamAScore'),
+              Column(
+                children: <Widget>[
+                  IconButton(
+                    icon: Icon(Icons.add),
+                    onPressed: _incrementTeamAScore,
+                  ),
+                  IconButton(
+                    icon: Icon(Icons.remove),
+                    onPressed: _decrementTeamAScore,
+                  ),
+                ],
+              ),
+            ],
           ),
-        ))));
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: <Widget>[
+              Text('FRA', style: TextStyle(
+                fontSize: 25,
+                fontWeight: FontWeight.bold,
+                color: Colors.black
+              ),),
+              Text('$_teamBScore'),
+              Column(
+                children: <Widget>[
+                  IconButton(
+                    icon: Icon(Icons.add),
+                    onPressed: _incrementTeamBScore,
+                  ),
+                  IconButton(
+                    icon: Icon(Icons.remove),
+                    onPressed: _decrementTeamBScore,
+                  ),
+                ],
+              ),
+            ],
+          ),
+        ],
+      ),
+    );
   }
 }
