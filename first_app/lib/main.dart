@@ -31,6 +31,7 @@ class _ScoreBoardState extends State<ScoreBoard> {
     return Scaffold(
       
       appBar: AppBar(
+        backgroundColor: Colors.lightBlueAccent,
         title: Center(child: Text('Score Board')),
       ),
       body: SafeArea(
